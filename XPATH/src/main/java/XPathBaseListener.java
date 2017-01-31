@@ -27,13 +27,13 @@ public class XPathBaseListener implements XPathListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterApDouble(XPathParser.ApDoubleContext ctx) { }
+	@Override public void enterApWholeFile(XPathParser.ApWholeFileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitApDouble(XPathParser.ApDoubleContext ctx) { }
+	@Override public void exitApWholeFile(XPathParser.ApWholeFileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

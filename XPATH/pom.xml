@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <version>4.3</version>
+            <version>4.5.3</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -32,7 +32,7 @@
             <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
-                <version>4.3</version>
+                <version>4.5.3</version>
                 <configuration>
                     <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
