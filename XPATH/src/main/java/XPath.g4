@@ -3,7 +3,7 @@ grammar XPath;
 
 //absolute path
 ap: 'doc(' fileName ')/' rp  #apSingle
-  | 'doc(' fileName ')//' rp #apDouble
+  | 'doc(' fileName ')//' rp #apWholeFile
   ;
 
 //relative path
@@ -35,7 +35,8 @@ IS: '==' | 'is';
 
 tagName:  ID;
 attName:  ID;
-fileName: ID;
+fileName: '"' ID '"';
+
 //fileName: [a-zA-Z0-9_, ., /]+
 
-ID: [a-zA-Z0-9]+ ;
+ID: [a-zA-Z0-9._]+ ;

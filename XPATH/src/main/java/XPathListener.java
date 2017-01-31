@@ -19,17 +19,17 @@ public interface XPathListener extends ParseTreeListener {
 	 */
 	void exitApSingle(XPathParser.ApSingleContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code apDouble}
+	 * Enter a parse tree produced by the {@code apWholeFile}
 	 * labeled alternative in {@link XPathParser#ap}.
 	 * @param ctx the parse tree
 	 */
-	void enterApDouble(XPathParser.ApDoubleContext ctx);
+	void enterApWholeFile(XPathParser.ApWholeFileContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code apDouble}
+	 * Exit a parse tree produced by the {@code apWholeFile}
 	 * labeled alternative in {@link XPathParser#ap}.
 	 * @param ctx the parse tree
 	 */
-	void exitApDouble(XPathParser.ApDoubleContext ctx);
+	void exitApWholeFile(XPathParser.ApWholeFileContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link XPathParser#rp}.
 	 * @param ctx the parse tree
