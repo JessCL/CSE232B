@@ -33,8 +33,8 @@ public class WriteXml {
 
             //删除指定节点
 
-            Element son =xmldoc.createElement("son");
-            son.setAttribute("id", "004");
+            Element son =xmldoc.createElement("PGROUP");
+            son.setAttribute("PERSONA", "OCTAVIUS CAESAR");
 
             Element name = xmldoc.createElement("name");
             name.setTextContent("小儿子");
@@ -43,6 +43,7 @@ public class WriteXml {
             Element age = xmldoc.createElement("name");
             age.setTextContent("0");
             son.appendChild(age);
+
 
             root.appendChild(son);
             //保存

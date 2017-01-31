@@ -52,7 +52,9 @@ public class Main {
             System.out.println(element.getChildNodes().item(0).getNodeValue());
             System.out.println("Main function works well");
             */
-
+            WriteXml writer = new WriteXml();
+            writer.getPath("caesar_result.xml");
+            writer.createSon();
         } catch (Exception e) {
             System.out.println("exception:" + e.getMessage());
         }

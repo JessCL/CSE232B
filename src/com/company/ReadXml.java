@@ -25,7 +25,7 @@ public class ReadXml {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(xmlPath); // 使用dom解析xml文件
 
-            NodeList sonlist = doc.getElementsByTagName("PLAY");
+            NodeList sonlist = doc.getElementsByTagName("PGROUP");
             for (int i = 0; i < sonlist.getLength(); i++) // 循环处理对象
             {
                 Element son = (Element)sonlist.item(i);;
