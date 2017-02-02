@@ -22,13 +22,13 @@ public class ReadXml {
         try {
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(xmlPath); // 使用dom解析xml文件
-<<<<<<< HEAD:XPATH/src/main/java/ReadXml.java
+
             Element root = doc.getDocumentElement();
             NodeList sonlist = doc.getElementsByTagName("PLAY");
-=======
 
-            NodeList sonlist = doc.getElementsByTagName("PGROUP");
->>>>>>> a5391101cffe4e808635e399ebebb5fc6bb3904c:src/com/company/ReadXml.java
+
+            //NodeList sonlist = doc.getElementsByTagName("PGROUP");
+
             for (int i = 0; i < sonlist.getLength(); i++) // 循环处理对象
             {
                 Element son = (Element)sonlist.item(i);;
