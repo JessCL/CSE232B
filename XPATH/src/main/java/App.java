@@ -11,7 +11,7 @@ public class App {
         try {
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//(ACT,PERSONAE)/TITLE");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PERSONAE//PERSONA");
-            ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[./TITLE]/*/SPEECH/../*/.././TITLE");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[./TITLE]/*/SPEECH/../*/.././TITLE");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[not(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[not(./TITLE)==(./TITLE)]");
@@ -24,7 +24,14 @@ public class App {
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/(ACT,PERSONAE)");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")//actor[@id]");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")/actors");
-            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")//@id");
+
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")//actors[./actor = ./actor]");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")//actors[./actor eq ./actor]");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")//actors[./actor == ./actor]");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")//actors[./actor is ./actor]");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")/*[not singer]");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")/*");
+            ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")/*[singer]");
 
             XPathLexer lexer = new XPathLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -39,7 +46,7 @@ public class App {
 
 
             WriteXml writer = new WriteXml();
-            writer.getPath("caesar_result.xml");
+            writer.getPath("result.xml");
             writer.setNodesToWrite(results);// c is the resulting linkedlist
             writer.createSon();
 

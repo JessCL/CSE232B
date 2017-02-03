@@ -5,6 +5,9 @@
         <actor id="2">Liam Neeson</actor>
         <actor id="3">Michael Caine</actor>
     </actors>
+    <actors>
+        <actor id="1">Christian Bale</actor>
+    </actors>
     <singers>
         <singer id="4">Tom Waits</singer>
         <singer id="5">B.B. King</singer>

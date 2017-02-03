@@ -203,11 +203,12 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
             LinkedList<Node> leftList = visit(ctx.rp(0));
             currentNodes = singleCurrent;
             LinkedList<Node> rightList = visit(ctx.rp(1));
-
+            //need improve
             for (Node left : leftList)
                 for (Node right: rightList)
-                    if (left.isSameNode(right))
+                    if (left.isSameNode(right) && !results.contains(node))
                         results.add(node);
+
         }
         currentNodes = results;
         return results;
@@ -226,10 +227,10 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
             LinkedList<Node> leftList = visit(ctx.rp(0));
             currentNodes = singleCurrent;
             LinkedList<Node> rightList = visit(ctx.rp(1));
-
+            //need improve
             for (Node left : leftList)
                 for (Node right: rightList)
-                    if (left.isEqualNode(right))
+                    if (left.isEqualNode(right) && !results.contains(node))
                         results.add(node);
         }
         currentNodes = results;

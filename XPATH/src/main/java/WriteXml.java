@@ -11,11 +11,10 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.LinkedList;
+
 /**
  * Created by shirleyxie on 1/28/17.
  */
-
-
 public class WriteXml {
     static String xmlPath;
     static String tagname;
@@ -30,10 +29,17 @@ public class WriteXml {
     public static void createSon() {
         DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
         dbf.setIgnoringElementContentWhitespace(true);
-        try{
 
-            DocumentBuilder db=dbf.newDocumentBuilder();
-            Document xmldoc=db.parse(xmlPath);
+        try{
+            XmlImpl dd=new XmlImpl();
+            String str=xmlPath;
+            dd.init();
+            dd.createXml(str);    //创建xml
+
+            DocumentBuilder db= dbf.newDocumentBuilder();
+            //Document xmldoc = db.newDocument();
+            //Document xmldoc= db.parse(xmlPath);
+            Document xmldoc= db.parse(str);
             //Document importDoc = db.parse(originalxml);
             Element root = xmldoc.getDocumentElement();
 
@@ -44,27 +50,20 @@ public class WriteXml {
                     Node newChild = xmldoc.createTextNode(cur.getTextContent());
                     root.appendChild(newChild);
                 }else {
-                    //Element newChild = xmldoc.createElement(tagname);
-                    //newChild.setTextContent(cur.getTextContent());
                     Node newChild = cur.cloneNode(true);
                     root.appendChild(xmldoc.importNode(cur, true));
                 }
 
             }
 
-//            Element age = xmldoc.createElement("name");
-//            age.setTextContent("0");
-//            son.appendChild(age);
-//            root.appendChild(son);
-
             TransformerFactory factory = TransformerFactory.newInstance();
             Transformer former = factory.newTransformer();
-            former.transform(new DOMSource(xmldoc), new StreamResult(new File(xmlPath)));
+            former.transform(new DOMSource(xmldoc), new StreamResult(new File(str)));
 
         }catch(Exception e){
             e.printStackTrace();
         }
 
     }
-}
 
+}
