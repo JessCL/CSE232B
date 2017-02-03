@@ -66,8 +66,6 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
         return visit(ctx.rp(1));
     }
 
-
-
     @Override public LinkedList<Node> visitTextRP(XPathParser.TextRPContext ctx) {
          LinkedList<Node> childrenList = getChildren(currentNodes);
          for (Node child: childrenList)
@@ -76,8 +74,6 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
              }
          return currentNodes;
     }
-
-
 
     @Override public LinkedList<Node> visitAttRP(XPathParser.AttRPContext ctx) {
         LinkedList<Node> results= new LinkedList<Node>();
@@ -104,8 +100,7 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
 
     @Override public LinkedList<Node> visitSelfRP(XPathParser.SelfRPContext ctx) { return currentNodes; }
 
-
-    //~~
+    //pass test
     @Override public LinkedList<Node> visitCommaRP(XPathParser.CommaRPContext ctx) {
         LinkedList<Node> results;
         LinkedList<Node> oldCurrent = currentNodes;
@@ -118,17 +113,15 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
         results = resultsLeft;
         currentNodes = results;
         return results;}
-    //~~
+
+    //pass test
     @Override public LinkedList<Node> visitTagRP(XPathParser.TagRPContext ctx) {
         LinkedList<Node> results = new LinkedList<Node>();
 
         LinkedList<Node> childrenList = getChildren(currentNodes);
-        for (Node child: childrenList){
-
-                if(child.getNodeName().equals(ctx.getText())) {
-                    results.add(child);
-            }
-        }
+        for (Node child: childrenList)
+            if(child.getNodeName().equals(ctx.getText()))
+                results.add(child);
 
         currentNodes = results;
         return results;}
@@ -139,7 +132,6 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
         currentNodes = visit(ctx.f());
         return currentNodes;
     }
-
 
     @Override public LinkedList<Node> visitRpFilter(XPathParser.RpFilterContext ctx) {
         LinkedList<Node> keepCurrent = currentNodes;
@@ -152,8 +144,6 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
                 results.add(node);
         }
         currentNodes = results;
-        //currentNodes = keepCurrent;
-        //current keep ???
         return results;
     }
 
@@ -169,7 +159,7 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
         return results; }
 
     @Override public LinkedList<Node> visitAndFilter(XPathParser.AndFilterContext ctx) {
-        //for order
+        //order
         HashSet<Node> leftSet = new HashSet<Node>(visit(ctx.f(0)));
         HashSet<Node> rightSet = new HashSet<Node>(visit(ctx.f(1)));
         HashSet<Node> intersection = new HashSet<Node>();
@@ -180,7 +170,7 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
         return results; }
 
     @Override public LinkedList<Node> visitOrFilter(XPathParser.OrFilterContext ctx) {
-        //测currentNode
+        //currentNode
         //order
         HashSet<Node> leftSet = new HashSet<Node>(visit(ctx.f(0)));
         HashSet<Node> rightSet = new HashSet<Node>(visit(ctx.f(1)));
@@ -195,11 +185,9 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
         LinkedList<Node> results = new LinkedList<>();
 
         for (Node node : keepCurrent){
-
             LinkedList<Node> singleCurrent = new LinkedList<>();
             singleCurrent.add(node);
             currentNodes = singleCurrent;
-
             LinkedList<Node> leftList = visit(ctx.rp(0));
             currentNodes = singleCurrent;
             LinkedList<Node> rightList = visit(ctx.rp(1));
@@ -208,18 +196,15 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
                 for (Node right: rightList)
                     if (left.isSameNode(right) && !results.contains(node))
                         results.add(node);
-
         }
         currentNodes = results;
         return results;
-
     }
     @Override public LinkedList<Node> visitEqFilter(XPathParser.EqFilterContext ctx) {
         LinkedList<Node> keepCurrent = currentNodes;
         LinkedList<Node> results = new LinkedList<>();
 
         for (Node node : keepCurrent){
-
             LinkedList<Node> singleCurrent = new LinkedList<>();
             singleCurrent.add(node);
             currentNodes = singleCurrent;
@@ -237,10 +222,7 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
         return results;
     }
 
-
     @Override public LinkedList<Node> visitBraceFilter(XPathParser.BraceFilterContext ctx) { return visit(ctx.f()); }
-
-
 
     @Override public LinkedList<Node> visitTagName(XPathParser.TagNameContext ctx) { return visitChildren(ctx); }
 
@@ -254,10 +236,7 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
         for(int j = 0; j < n.size(); j++) {
             Node curNode = n.get(j);
             for (int i = 0; i < curNode.getChildNodes().getLength(); i++) {
-                Node cur = curNode.getChildNodes().item(i);
-                //     if (i % 2 == 1) {
                 childrenList.add(curNode.getChildNodes().item(i));
-                //   }
             }
         }
         //childrenList.normalize();

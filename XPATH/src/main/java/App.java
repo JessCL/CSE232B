@@ -31,6 +31,21 @@ public class App {
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")//actors[./actor is ./actor]");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")/*[not singer]");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")/*");
+
+
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[(.//ACTOR) = (.//ACTOR)]/*");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[(.//ACTOR) is (.//ACTOR)]/*");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[(../ACTOR) is (.//ACTOR)]/*");//(这个句子是错的，解析不出来)
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[(.//ACT1) is (.//ACTOR)]/*");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[(.//ACTOR) is (.//ACTOR) and (.//actor)]/*");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[(.//ACTOR) is (.//ACTOR) and (.//ACT1)]/*");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[(.//ACTOR) is (.//ACTOR) or (.//actor)]/*");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")//actors[.//actor]");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[not (.//actor)]/*");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[not [(.//ACTOR) is (.//ACTOR)]]/*");// wired
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[[[(.//ACTOR) is (.//ACTOR)] or [(.//actor)]] and [not [.//actor]]]/*");//写了一个难的，但是不明白为什么通不过
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[[(.//ACTOR) is (.//ACTOR)] or [(.//actor)]]] ");//写了一个难的，但是不明白为什么通不过
+
             ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")/*[singer]");
 
             XPathLexer lexer = new XPathLexer(input);
@@ -43,20 +58,14 @@ public class App {
             CustomizedVisitor customizedlVisitor = new CustomizedVisitor();
             LinkedList<Node> results = customizedlVisitor.visit(tree);
 
-
-
             WriteXml writer = new WriteXml();
-            writer.getPath("result.xml");
-            writer.setNodesToWrite(results);// c is the resulting linkedlist
+            writer.getPath("output.xml");
+            writer.setNodesToWrite(results);
             writer.createSon();
-
-
 
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
         }
-
-
     }
 }
