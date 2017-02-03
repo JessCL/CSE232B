@@ -1,5 +1,6 @@
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.LinkedList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -11,37 +12,37 @@ import org.w3c.dom.Node;
 /**
  * Created by shirleyxie on 1/28/17.
  */
+
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+//import jdk.internal.org.xml.sax.EntityResolver;
+//import jdk.internal.org.xml.sax.InputSource;
+//import jdk.internal.org.xml.sax.SAXException;
+import org.w3c.dom.*;
+
+import javax.xml.soap.Node.*;
+
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 public class ReadXml {
-    static String xmlPath;
-    public void getPath(String path) {
-        this.xmlPath = path;
-    }
-    public static void getFamilyMemebers(){
-        DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
-        dbf.setIgnoringElementContentWhitespace(true);
-        try {
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(xmlPath); // 使用dom解析xml文件
-
-            Element root = doc.getDocumentElement();
-            NodeList sonlist = doc.getElementsByTagName("PLAY");
-
-
-            //NodeList sonlist = doc.getElementsByTagName("PGROUP");
-
-            for (int i = 0; i < sonlist.getLength(); i++) // 循环处理对象
-            {
-                Element son = (Element)sonlist.item(i);;
-
-                for (Node node = son.getFirstChild(); node != null; node = node.getNextSibling()){
-                    if (node.getNodeType() == Node.ELEMENT_NODE){
-                        String name = node.getNodeName();
-                        String value = node.getFirstChild().getNodeValue();
-                        System.out.println(name+" : "+value);
-                    }
-                }
-            }
-        } catch (Exception e) {
+    static Node rootNode;
+    public static void getRootNode(String fileName){
+        try{
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setIgnoringElementContentWhitespace(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.parse(new File(fileName));
+        Element rootElement = document.getDocumentElement();
+        rootNode = (Node) rootElement;
+        rootNode.normalize();
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

@@ -5,23 +5,23 @@ grammar XPath;
 ap: doc  '//' rp    #doubleAP
   | doc  '/' rp     #singleAP
   ;
-doc: 'doc("' FILENAME '")';
+doc: 'doc("' filename '")';
 //relative path
 rp : tagName                   #tagRP
-   | '*'                       #anyRP
+   | '*'                       #childrenRP
    | '.'                       #selfRP
    | '..'                      #parentRP
    | 'text()'                  #textRP
    | '@' attName               #attRP
    |  rp ',' rp                #commaRP
    | '(' rp ')'                #braceRP
-   | rp '/' rp                 #singleSlashRp
+   | rp '/' rp                 #singleSlashRP
    | rp '//' rp                #doubleSlashRP
    | rp '[' f ']'              #filterRP
    ; 
 
 //path filter
-f : rp                         #rpFiter
+f : rp                         #rpFilter
   | rp EQ rp                   #eqFilter
   | rp IS rp                   #isFilter
   | '(' f ')'                  #braceFilter
@@ -35,9 +35,10 @@ attName:  ID;
 
 EQ: '=' | 'eq';
 IS: '==' | 'is';
-ID: [a-zA-Z]+ ;
+ID: [a-zA-Z0-9]+ ;
 
-FILENAME:('a'..'z'|'A'..'Z'|'.'|'..'|'_')+ ;
+filename: FILENAME;
+FILENAME: [a-zA-Z0-9._]+;
 
 WHITESPACE:[ \t\n\r]+ -> skip;
 

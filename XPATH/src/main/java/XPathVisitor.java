@@ -30,13 +30,6 @@ public interface XPathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDoc(XPathParser.DocContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code anyRP}
-	 * labeled alternative in {@link XPathParser#rp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAnyRP(XPathParser.AnyRPContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code braceRP}
 	 * labeled alternative in {@link XPathParser#rp}.
 	 * @param ctx the parse tree
@@ -93,6 +86,13 @@ public interface XPathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommaRP(XPathParser.CommaRPContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code childrenRP}
+	 * labeled alternative in {@link XPathParser#rp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitChildrenRP(XPathParser.ChildrenRPContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code tagRP}
 	 * labeled alternative in {@link XPathParser#rp}.
 	 * @param ctx the parse tree
@@ -100,12 +100,12 @@ public interface XPathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTagRP(XPathParser.TagRPContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code singleSlashRp}
+	 * Visit a parse tree produced by the {@code singleSlashRP}
 	 * labeled alternative in {@link XPathParser#rp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSingleSlashRp(XPathParser.SingleSlashRpContext ctx);
+	T visitSingleSlashRP(XPathParser.SingleSlashRPContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code eqFilter}
 	 * labeled alternative in {@link XPathParser#f}.
@@ -113,13 +113,6 @@ public interface XPathVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitEqFilter(XPathParser.EqFilterContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code rpFiter}
-	 * labeled alternative in {@link XPathParser#f}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRpFiter(XPathParser.RpFiterContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code notFilter}
 	 * labeled alternative in {@link XPathParser#f}.
@@ -141,6 +134,13 @@ public interface XPathVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIsFilter(XPathParser.IsFilterContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code rpFilter}
+	 * labeled alternative in {@link XPathParser#f}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRpFilter(XPathParser.RpFilterContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code braceFilter}
 	 * labeled alternative in {@link XPathParser#f}.
@@ -167,4 +167,10 @@ public interface XPathVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAttName(XPathParser.AttNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XPathParser#filename}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFilename(XPathParser.FilenameContext ctx);
 }
