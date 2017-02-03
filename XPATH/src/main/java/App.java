@@ -9,8 +9,41 @@ import java.util.*;
 public class App {
     public static void main(String[] args) {
         try {
+
+            ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY");//, 1);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/FM/@name");//, 1);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/FM/@name/..");//, 1);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/FM/@name/../..");//, 1);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/FM/@name/../@name");//, 1);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//PERSONA");//, 36);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/FM/@nam");//, 0);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/@name");//, 0);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//@name");//, 2);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/TITLE/text()");//, 1);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/TITLE/text()/..");//, 1);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//LINE");//, 2596);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/*/./../TITLE/text()");//, 1);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/PERSONAE/PGROUP/PERSONA[text()]");//, 27);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/PERSONAE/PGROUP/PERSONA[text()=text()]");//, 27);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/PERSONAE/PGROUP/PERSONA[text() eq text()]");//, 27);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/PERSONAE/PGROUP/PERSONA[text()==text()]");//, 27);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/PERSONAE/PGROUP/PERSONA[text() is text()]");//, 27);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/PERSONAE/PGROUP/PERSONA[./text() is text()]");//, 27);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/PERSONAE/PGROUP/PERSONA[(./text() is text()) " +
+            //        "or not (./text() is text())]");//, 27);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//SPEAKER");//, 1596 / 2);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//SPEECH");//, 1590 / 2);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//LINE/text()");//, 5192 / 2);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//*[@name]");//, 2);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//(ACT,PERSONAE)/TITLE");//, 6);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[./TITLE]/*/SPEECH/../TITLE");//, 18);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[./TITLE]/*/SPEECH/../*/.././TITLE");//, 18);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE");//, 18);
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[not(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE");//, 0);
+
+
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//(ACT,PERSONAE)/TITLE");
-            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PERSONAE//PERSONA");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[./TITLE]/*/SPEECH/../*/.././TITLE");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE");
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT[not(./TITLE)==(./TITLE)]/*/SPEECH/../TITLE");
@@ -46,7 +79,7 @@ public class App {
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[[[(.//ACTOR) is (.//ACTOR)] or [(.//actor)]] and [not [.//actor]]]/*");//写了一个难的，但是不明白为什么通不过
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"text2.xml\")//ACT[[(.//ACTOR) is (.//ACTOR)] or [(.//actor)]]] ");//写了一个难的，但是不明白为什么通不过
 
-            ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")/*[singer]");
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"text1.xml\")/*[singer]");
 
             XPathLexer lexer = new XPathLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -62,6 +95,7 @@ public class App {
             writer.getPath("output.xml");
             writer.setNodesToWrite(results);
             writer.createSon();
+            System.out.println(results.size());
 
         } catch (Exception e) {
             e.printStackTrace();

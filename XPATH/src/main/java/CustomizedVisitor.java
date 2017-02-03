@@ -2,35 +2,44 @@ import java.util.*;
 /**
  * Created by onion on 2/1/17.
  */
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.LinkedList;
 
-//import jdk.internal.org.xml.sax.EntityResolver;
-//import jdk.internal.org.xml.sax.InputSource;
-//import jdk.internal.org.xml.sax.SAXException;
-import org.w3c.dom.*;
-
-import javax.xml.soap.Node.*;
-
-import org.xml.sax.EntityResolver;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
     LinkedList<Node> currentNodes = new LinkedList<Node>();
 
     @Override
     public LinkedList<Node> visitDoc(XPathParser.DocContext ctx){
-        String filename = ctx.filename().getText();
-        ReadXml.getRootNode(filename);
-        Node rootNode = ReadXml.rootNode;
-        currentNodes.add(rootNode);
-        return currentNodes;
+        File xmlFile = new File(ctx.filename().getText());
+        DocumentBuilderFactory docBF = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docB = null;
+        LinkedList<Node> results = new LinkedList<>();
+        try {
+            docB = docBF.newDocumentBuilder();
+        } catch (ParserConfigurationException pE1) {
+            pE1.printStackTrace();
+        }
+        Document doc = null; //use for what
+        try {
+            if (docB != null) {
+                doc = docB.parse(xmlFile);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        if (doc != null) {
+            doc.getDocumentElement().normalize();
+        }
+        results.add(doc);
+        currentNodes = results;
+        return results;
     }
 
 
@@ -70,7 +79,7 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
          LinkedList<Node> childrenList = getChildren(currentNodes);
          for (Node child: childrenList)
              if (child.getNodeType() == javax.xml.soap.Node.TEXT_NODE && !child.getTextContent().equals("\n") && !child.getTextContent().equals("\n\n")) {
-                    System.out.print(child.getNodeValue());
+                    System.out.println(child.getNodeValue());
              }
          return currentNodes;
     }
@@ -117,14 +126,19 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
     //pass test
     @Override public LinkedList<Node> visitTagRP(XPathParser.TagRPContext ctx) {
         LinkedList<Node> results = new LinkedList<Node>();
+        int i = 0;
+        for (Node node: currentNodes)
+           i  = node.getChildNodes().getLength();
 
+        //System.out.println(i);
         LinkedList<Node> childrenList = getChildren(currentNodes);
         for (Node child: childrenList)
-            if(child.getNodeName().equals(ctx.getText()))
+            if(child.getNodeType() == Node.ELEMENT_NODE && child.getNodeName().equals(ctx.getText()))
                 results.add(child);
 
         currentNodes = results;
-        return results;}
+        return results;
+    }
 
 
     @Override public LinkedList<Node> visitFilterRP(XPathParser.FilterRPContext ctx) {

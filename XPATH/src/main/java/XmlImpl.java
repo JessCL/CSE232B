@@ -40,17 +40,6 @@ public class XmlImpl implements XmlInterface{
     public void createXml(String fileName) {
         Element root = this.document.createElement("Results");
         this.document.appendChild(root);
-//        Element employee = this.document.createElement("employee");
-//        Element name = this.document.createElement("name");
-//        name.appendChild(this.document.createTextNode("wangchenyang"));
-//        employee.appendChild(name);
-//        Element sex = this.document.createElement("sex");
-//        sex.appendChild(this.document.createTextNode("m"));
-//        employee.appendChild(sex);
-//        Element age = this.document.createElement("age");
-//        age.appendChild(this.document.createTextNode("26"));
-//        employee.appendChild(age);
-//        root.appendChild(employee);
         TransformerFactory tf = TransformerFactory.newInstance();
         try {
             Transformer transformer = tf.newTransformer();
