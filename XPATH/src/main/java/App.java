@@ -10,7 +10,19 @@ public class App {
     public static void main(String[] args) {
         try {
 
-            ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY");//, 1);
+            //XPath #10
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//PERSONAE//GRPDESCR");
+
+            //XPath#3
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//ACT//SPEECH/../../*/../TITLE");
+
+            //XPath #6
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//SPEECH/SPEAKER[not(./text()==./*/text())]/../../../../TITLE");
+
+            //XPath #7
+            ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")//(ACT/SCENE/SPEECH)/(SPEAKER)/../.[not (./../TITLE==./LINE) and (./../*/SPEAKER==./SPEAKER) ]/../TITLE");
+
+            //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY");//, 1);
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/FM/@name");//, 1);
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/FM/@name/..");//, 1);
             //ANTLRInputStream input = new ANTLRInputStream("doc(\"j_caesar.xml\")/PLAY/FM/@name/../..");//, 1);

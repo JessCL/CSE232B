@@ -47,7 +47,7 @@ public class CustomizedVisitor extends XPathBaseVisitor<LinkedList> {
         visit(ctx.doc());
         LinkedList<Node> descendents = getDescendents(currentNodes);
         currentNodes.addAll(descendents);
-        return visit(ctx.rp());
+        return visit(ctx.rp()Ï);
     }
 
     @Override public LinkedList<Node> visitSingleAP(XPathParser.SingleAPContext ctx) {
