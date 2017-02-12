@@ -1,5 +1,5 @@
 # CSE232B
-Project of CSE232B Database Systems: Advanced Topics and Implementation at UCSD. Construction of an XQuery processor.
+Project of UC San Diego Winter 2017 CSE232B [Database Systems: Advanced Topics and Implementation]: Construction of an XQuery processor.
 
 Course Website : https://cseweb.ucsd.edu/classes/wi17/cse232B-a/
 
