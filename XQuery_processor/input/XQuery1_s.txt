@@ -1,0 +1,6 @@
+<acts>
+{for $sp in doc("j_caesar.xml")//ACT/SCENE/SPEECH/SPEAKER
+ where $sp/text() = "CASCA"
+   return <speaker> {$sp/text()}</speaker>
+}
+</acts>
