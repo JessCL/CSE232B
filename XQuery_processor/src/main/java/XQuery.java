@@ -18,7 +18,7 @@ public class XQuery {
 
     public static void main(String[] args) throws IOException {
         try{
-            String XQueryFilename = "input/XQuery4.txt";
+            String XQueryFilename = "input/9";
             InputStream is = new FileInputStream(XQueryFilename);
             ANTLRInputStream input = new ANTLRInputStream(is);
 
@@ -31,8 +31,16 @@ public class XQuery {
             //for Visitor
             CustomizedXQueryVisitor visitor = new CustomizedXQueryVisitor();
             LinkedList<Node> results = visitor.visit(tree);
-            System.out.println(results.get(0).getChildNodes().getLength());
-            writeToFile(visitor.outputDoc, results, "output/XQuery4.xml");
+            LinkedList<Node> finalResult;
+            if (results.size() == 1) {
+                System.out.println(results.get(0).getChildNodes().getLength());
+                finalResult = results;
+            }
+            else{
+                System.out.println(results.size());
+                finalResult = makeElem(visitor.outputDoc, "result", results);
+            }
+            writeToFile(visitor.outputDoc, finalResult, "output/9.xml");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,6 +62,18 @@ public class XQuery {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private static LinkedList<Node> makeElem(Document doc, String tag, LinkedList<Node> list){
+        Node result = doc.createElement(tag);
+        for (Node node : list) {
+            if (node != null) {
+                Node newNode = doc.importNode(node, true);
+                result.appendChild(newNode);
+            }
+        }
+        LinkedList<Node> results = new LinkedList<>();
+        results.add(result);
+        return results;
     }
 
 }

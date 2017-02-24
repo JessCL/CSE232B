@@ -31,11 +31,11 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
     }
 
     @Override public LinkedList<Node> visitFLWR(XQueryParser.FLWRContext ctx) {
+        LinkedList<Node> results = new LinkedList<>();
         HashMap<String, LinkedList<Node>> contextMapOld = new HashMap<>(contextMap);
         contextStack.push(contextMapOld);
 
 
-        LinkedList<Node> results = new LinkedList<>();
         FLWRHelper(0, results, ctx);
 
         contextMap = contextStack.pop();
@@ -119,17 +119,24 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
     }
 
     @Override public LinkedList<Node> visitSingleSlashXQ(XQueryParser.SingleSlashXQContext ctx) {
-        LinkedList<Node> currentNodes = visit(ctx.xq());
+        LinkedList<Node> currentNodes = new LinkedList<>();
+        copyOf(visit(ctx.xq()), currentNodes);
         LinkedList<Node> results = XPath.evalRp(currentNodes, ctx.rp().getText());
         return results;
     }
 
     @Override public LinkedList<Node> visitDoubleSlashXQ(XQueryParser.DoubleSlashXQContext ctx) {
-        LinkedList<Node> currentNodes = visit(ctx.xq());
+        LinkedList<Node> currentNodes = new LinkedList<>();
+        copyOf(visit(ctx.xq()), currentNodes);
         LinkedList<Node> descendants = getDescendants(currentNodes);
         currentNodes.addAll(descendants);
         LinkedList<Node> results = XPath.evalRp(currentNodes, ctx.rp().getText());
         return results;
+    }
+
+    private void copyOf(LinkedList<Node> l1, LinkedList<Node> l2){
+        for (Node node : l1)
+            l2.add(node);
     }
     /*
     private  LinkedList<Node> forClauseHelper(int k, XQueryParser.ForClauseContext ctx){
@@ -180,10 +187,12 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
 
 
 
-    private void satisfyCondHelper(int k, LinkedList<Node> result, XQueryParser.SatisfyCondContext ctx){
+    private boolean satisfyCondHelper(int k, XQueryParser.SatisfyCondContext ctx){
+
         int numFor = ctx.var().size();
         if (k == numFor){
-            result = visit(ctx.cond());
+            if (visit(ctx.cond()).size() == 1)
+                return true;
         }
         else{
             String key = ctx.var(k).getText();
@@ -196,19 +205,23 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
                 LinkedList<Node> value = new LinkedList<>(); value.add(node);
                 contextMap.put(key, value);
                 if (k+1 <= numFor)
-                    satisfyCondHelper(k+1, result, ctx);
+                    if (satisfyCondHelper(k+1, ctx)) {
+                    contextMap = contextStack.pop();
+                    return true;
+                }
                 contextMap = contextStack.pop();
             }
         }
+        return false;
     }
 
 
     @Override public LinkedList<Node> visitSatisfyCond(XQueryParser.SatisfyCondContext ctx) {
-        HashMap<String, LinkedList<Node>> contextMapOld = new HashMap<>(contextMap);
-        contextStack.push(contextMapOld);
         LinkedList<Node> result = new LinkedList<>();
-        satisfyCondHelper(0, result, ctx);
-        contextMap = contextStack.pop();
+        if (satisfyCondHelper(0, ctx)){
+            Node True = doc.createTextNode("true");
+            result.add(True);
+        }
         return result;
     }
 
@@ -257,6 +270,7 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
                 }
         return result;
     }
+
 
     @Override public LinkedList<Node> visitEqCond(XQueryParser.EqCondContext ctx) {
         LinkedList<Node> left = new LinkedList<>(visit(ctx.xq(0)));

@@ -1,6 +1,6 @@
 <acts>
-{for $sp in doc("j_caesar.xml")//ACT/SCENE/SPEECH/SPEAKER
- where $sp/text() = "CASCA"
-   return <speaker> {$sp/text()}</speaker>
+{for $a in doc("j_caesar.xml")//ACT
+
+   return <a> {$a/TITLE/text()}</a>
 }
 </acts>

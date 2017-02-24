@@ -1,0 +1,16 @@
+<result>{
+
+for $s in document("j_caesar.xml")//SCENE
+
+where $s//SPEAKER/text()="CALPURNIA"
+return
+<scenes> { <scene> {$s/TITLE/text()} </scene>,
+for $a in document("j_caesar.xml")//ACT
+where some $s1 in (for $x in $a//SCENE where $x/TITLE/text()="SCENE II.  A public place." return $x) satisfies $s1 eq $s and $a/TITLE/text() = "ACT I"
+return <act>
+{$a/TITLE/text()}
+</act>
+   }
+</scenes>
+}
+</result>

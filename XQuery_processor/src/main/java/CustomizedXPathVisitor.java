@@ -83,11 +83,13 @@ public class CustomizedXPathVisitor extends XPathBaseVisitor<LinkedList> {
 
     @Override public LinkedList<Node> visitTextRP(XPathParser.TextRPContext ctx) {
          LinkedList<Node> childrenList = getChildren(currentNodes);
+         /*
          for (Node child: childrenList)
              if (child.getNodeType() == javax.xml.soap.Node.TEXT_NODE && !child.getTextContent().equals("\n") && !child.getTextContent().equals("\n\n")) {
                     System.out.println(child.getNodeValue());
              }
-        currentNodes = childrenList;
+         */
+         currentNodes = childrenList;
          return currentNodes;
     }
 
@@ -133,11 +135,7 @@ public class CustomizedXPathVisitor extends XPathBaseVisitor<LinkedList> {
     //pass test
     @Override public LinkedList<Node> visitTagRP(XPathParser.TagRPContext ctx) {
         LinkedList<Node> results = new LinkedList<Node>();
-        int i = 0;
-        for (Node node: currentNodes)
-           i  = node.getChildNodes().getLength();
 
-        //System.out.println(i);
         LinkedList<Node> childrenList = getChildren(currentNodes);
         for (Node child: childrenList)
             if(child.getNodeType() == Node.ELEMENT_NODE && child.getNodeName().equals(ctx.getText()))
