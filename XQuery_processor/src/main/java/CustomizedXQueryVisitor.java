@@ -56,11 +56,9 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
         else{
             String key = ctx.forClause().var(k).getText();
             LinkedList<Node> valueList = visit(ctx.forClause().xq(k));
-
             for (Node node: valueList){
                 HashMap<String, LinkedList<Node>> contextMapOld = new HashMap<>(contextMap);
                 contextStack.push(contextMapOld);
-
                 LinkedList<Node> value = new LinkedList<>(); value.add(node);
                 contextMap.put(key, value);
                 if (k+1 <= numFor)
