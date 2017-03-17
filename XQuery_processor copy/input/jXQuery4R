@@ -1,0 +1,19 @@
+for $tuple in
+ join( for  $q1 in document("j_caesar.xml")//ACT,
+$sa in $q1//SCENE,
+$spa in $sa//SPEAKER,
+$spb in $sa//SPEAKER/text(),
+$spea in $sa//SPEECH,
+$spec in $sa//SPEECH
+where $spb = "FLAVIUS"
+return <tuple> {<sa>{$sa}</sa>,<spa>{$spa}</spa>,<spea>{$spea}</spea>,<spec>{$spec}</spec>} </tuple>,
+     for  $q2 in document("j_caesar.xml")//ACT,
+$sb in $q2//SCENE,
+$spc in $sb//SPEAKER,
+$spd in $sb//SPEAKER/text(),
+$speb in $sb//SPEECH,
+$sped in $sb//SPEECH
+where $spd = "FLAVIUS"
+return <tuple> {<spc>{$spc}</spc>,<sped>{$sped}</sped>,<sb>{$sb}</sb>,<speb>{$speb}</speb>} </tuple>,
+[spa, sa, spea, spec], [spc, sb, sped, speb])
+return <result>{<title>{($tuple/sa/*/TITLE/text())}</title>,<speaker>{($tuple/spa/*/*)}</speaker>}</result>

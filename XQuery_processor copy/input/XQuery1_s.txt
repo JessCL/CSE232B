@@ -1,0 +1,6 @@
+<acts>
+{for $a in doc("j_caesar.xml")//ACT
+
+   return <a> {$a/TITLE/text()}</a>
+}
+</acts>

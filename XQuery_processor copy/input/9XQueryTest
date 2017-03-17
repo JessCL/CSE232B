@@ -1,0 +1,9 @@
+for    $pgroup in doc("j_caesar.xml")//PGROUP,
+        $persona in $pgroup/PERSONA,
+        $act in doc("j_caesar.xml")//ACT,
+        $speaker in $act//SPEECH/SPEAKER
+ where $persona/text() = $speaker/text() and $persona/text()="MARULLUS"
+ return <tuple>{<act>{$act/TITLE}</act>,
+         <speaker>{$speaker}</speaker>,
+        <persona>{$persona}</persona>}
+         </tuple>

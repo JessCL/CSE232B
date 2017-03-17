@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<root>
+    <actors>
+        <actor id="1">Christian Bale</actor>
+        <actor id="2">Liam Neeson</actor>
+        <actor id="3">Michael Caine</actor>
+    </actors>
+    <actors>
+        <actor id="1">Christian Bale</actor>
+    </actors>
+    <singers>
+        <singer id="4">Tom Waits</singer>
+        <singer id="5">B.B. King</singer>
+        <singer id="6">Ray Charles</singer>
+    </singers>
+    <scene>
+        <ACT>
+            <actor>Him</actor>
+        </ACT>
+        <ACT>
+            <ACTOR>Mary</ACTOR>
+            <ACT1>don't be absurd'</ACT1>
+            <ACT2>I've been in Califonia for eighteen months</ACT2>
+        </ACT>
+        <ACT>
+            <ACTOR>Tom</ACTOR>
+            <ACT1>I'm sorry</ACT1>
+            <ACT2>Drive her home</ACT2>
+        </ACT>
+        <ACT>
+            <ACTOR>Mary</ACTOR>
+            <ACT1>I'll be there shortly'</ACT1>
+            <ACT2>love you forever</ACT2>
+        </ACT>
+    </scene>
+</root>

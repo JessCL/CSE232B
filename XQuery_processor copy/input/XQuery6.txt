@@ -1,0 +1,3 @@
+for $s in document("j_caesar.xml")//SPEAKER,$a in document("j_caesar.xml")//ACT
+                where some $s1 in $a//SPEAKER satisfies $s1 eq $s
+                return <when>{$a/TITLE/text()}</when>
