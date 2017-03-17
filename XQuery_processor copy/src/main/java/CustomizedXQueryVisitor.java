@@ -147,7 +147,7 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
             tempRet[i] = tempRet[i]+"$tuple/";
         }
         retClause  = tempRet[0];
-        for (int i = 1; i < tempRet.length-1; i++) {
+        for (int i = 1; i < tempRet.length; i++) {
             String[] cur1 = tempRet[i].split(",",2);
             String[] cur2 = tempRet[i].split("}",2);
             String[] cur3 = tempRet[i].split("/",2);
@@ -174,12 +174,12 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
             tempRet[i] += cur[1];
             retClause = retClause + tempRet[i];
         }
-        int end = tempRet.length-1;
-        String[] cur = tempRet[end].split("}",2);
-        tempRet[end] = cur[0] + "/*}";
-        tempRet[end] += cur[1];
-        retClause = retClause + tempRet[end];
-       // retClause += tempRet[tempRet.length-1];
+//        int end = tempRet.length-1;
+//        String[] cur = tempRet[end].split("}",2);
+//        tempRet[end] = cur[0] + "/*}";
+//        tempRet[end] += cur[1];
+//        retClause = retClause + tempRet[end];
+
         output += "return\n";
         output += retClause+"\n";
         System.out.println("return");

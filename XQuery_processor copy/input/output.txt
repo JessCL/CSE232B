@@ -10,4 +10,4 @@ where $spb eq "FLAVIUS"
                   return<tuple>  <b>  {$b}  </b>, <sb>  {$sb}  </sb>, <spb>  {$spb}  </spb>, <spc>  {$spc}  </spc> </tuple>,
                  [sa,spa], [sb,spc]  )
 return
-<result>{<title>{$tuple/sa/TITLE/text()/*}</title>}</result>
+<result>{<title>{$tuple/sa/*/TITLE/text()}</title>}</result>

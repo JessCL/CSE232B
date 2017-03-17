@@ -26,26 +26,26 @@
       <file leaf-file-name="CustomizedXQueryVisitor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/CustomizedXQueryVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6924565">
-              <caret line="154" column="39" selection-start-line="154" selection-start-column="39" selection-end-line="154" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.33333334">
+              <caret line="149" column="42" selection-start-line="149" selection-start-column="42" selection-end-line="149" selection-end-column="42" />
               <folding>
                 <element signature="e#1869#1886#0" expanded="true" />
                 <element signature="e#1936#1944#0" expanded="true" />
                 <element signature="e#2595#2603#0" expanded="true" />
                 <element signature="method#PrintJoinCond#0;class#CustomizedXQueryVisitor#0" expanded="false" />
                 <element signature="method#Print2Join#0;class#CustomizedXQueryVisitor#0" expanded="false" />
-                <element signature="e#10032#10040#0" expanded="true" />
-                <element signature="e#10092#10100#0" expanded="true" />
-                <element signature="e#12969#12977#0" expanded="true" />
-                <element signature="e#13029#13037#0" expanded="true" />
+                <element signature="e#9991#9999#0" expanded="true" />
+                <element signature="e#10051#10059#0" expanded="true" />
+                <element signature="e#12928#12936#0" expanded="true" />
+                <element signature="e#12988#12996#0" expanded="true" />
                 <element signature="method#Print4Join#0;class#CustomizedXQueryVisitor#0" expanded="false" />
-                <element signature="e#15957#15965#0" expanded="true" />
-                <element signature="e#16017#16025#0" expanded="true" />
-                <element signature="e#18945#18953#0" expanded="true" />
-                <element signature="e#19005#19013#0" expanded="true" />
+                <element signature="e#15916#15924#0" expanded="true" />
+                <element signature="e#15976#15984#0" expanded="true" />
+                <element signature="e#18904#18912#0" expanded="true" />
+                <element signature="e#18964#18972#0" expanded="true" />
                 <element signature="method#Print6Join#0;class#CustomizedXQueryVisitor#0" expanded="false" />
-                <element signature="e#21933#21941#0" expanded="true" />
-                <element signature="e#21993#22001#0" expanded="true" />
+                <element signature="e#21892#21900#0" expanded="true" />
+                <element signature="e#21952#21960#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -671,7 +671,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.48949918" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25342464" sideWeight="0.5105008" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25342464" sideWeight="0.5105008" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.020547945" sideWeight="0.57350564" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27625203" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -679,7 +679,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24959612" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47260273" sideWeight="0.5613893" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47260273" sideWeight="0.5613893" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -797,6 +797,18 @@
           <properties />
           <option name="timeStamp" value="173" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/CustomizedXQueryVisitor.java</url>
+          <line>149</line>
+          <properties />
+          <option name="timeStamp" value="174" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/CustomizedXQueryVisitor.java</url>
+          <line>128</line>
+          <properties />
+          <option name="timeStamp" value="175" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/CustomizedXQueryVisitor.java</url>
           <line>287</line>
@@ -804,7 +816,7 @@
           <option name="timeStamp" value="172" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="174" />
+      <option name="time" value="176" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1227,6 +1239,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/input/jXQuery3">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="61" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/XQuery.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1237,36 +1257,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/input/jXQuery3">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="61" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/CustomizedXQueryVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6924565">
-          <caret line="154" column="39" selection-start-line="154" selection-start-column="39" selection-end-line="154" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="149" column="42" selection-start-line="149" selection-start-column="42" selection-end-line="149" selection-end-column="42" />
           <folding>
             <element signature="e#1869#1886#0" expanded="true" />
             <element signature="e#1936#1944#0" expanded="true" />
             <element signature="e#2595#2603#0" expanded="true" />
             <element signature="method#PrintJoinCond#0;class#CustomizedXQueryVisitor#0" expanded="false" />
             <element signature="method#Print2Join#0;class#CustomizedXQueryVisitor#0" expanded="false" />
-            <element signature="e#10032#10040#0" expanded="true" />
-            <element signature="e#10092#10100#0" expanded="true" />
-            <element signature="e#12969#12977#0" expanded="true" />
-            <element signature="e#13029#13037#0" expanded="true" />
+            <element signature="e#9991#9999#0" expanded="true" />
+            <element signature="e#10051#10059#0" expanded="true" />
+            <element signature="e#12928#12936#0" expanded="true" />
+            <element signature="e#12988#12996#0" expanded="true" />
             <element signature="method#Print4Join#0;class#CustomizedXQueryVisitor#0" expanded="false" />
-            <element signature="e#15957#15965#0" expanded="true" />
-            <element signature="e#16017#16025#0" expanded="true" />
-            <element signature="e#18945#18953#0" expanded="true" />
-            <element signature="e#19005#19013#0" expanded="true" />
+            <element signature="e#15916#15924#0" expanded="true" />
+            <element signature="e#15976#15984#0" expanded="true" />
+            <element signature="e#18904#18912#0" expanded="true" />
+            <element signature="e#18964#18972#0" expanded="true" />
             <element signature="method#Print6Join#0;class#CustomizedXQueryVisitor#0" expanded="false" />
-            <element signature="e#21933#21941#0" expanded="true" />
-            <element signature="e#21993#22001#0" expanded="true" />
+            <element signature="e#21892#21900#0" expanded="true" />
+            <element signature="e#21952#21960#0" expanded="true" />
           </folding>
         </state>
       </provider>
