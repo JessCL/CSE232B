@@ -17,6 +17,7 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
     private Stack<HashMap<String, LinkedList<Node>>> contextStack = new Stack<>();
     Document outputDoc = null;
     private Document doc = null;
+    boolean needRewrite = true;
 
     public CustomizedXQueryVisitor(){
         try {
@@ -32,16 +33,260 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
 
     @Override public LinkedList<Node> visitFLWR(XQueryParser.FLWRContext ctx) {
         LinkedList<Node> results = new LinkedList<>();
+
         HashMap<String, LinkedList<Node>> contextMapOld = new HashMap<>(contextMap);
         contextStack.push(contextMapOld);
-
-
-        FLWRHelper(0, results, ctx);
-
+        if (needRewrite){
+            String rewrited = reWriter(ctx);
+            results = XQuery.evalRewrited(rewrited);
+        }
+        else{
+            FLWRHelper(0, results, ctx);
+        }
         contextMap = contextStack.pop();
         return results;
     }
 
+
+    private String reWriter(XQueryParser.FLWRContext ctx){
+        //PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+        String output = "";
+
+        int numFor;// nums of for clause
+        numFor = ctx.forClause().var().size();
+        List<HashSet<String>> classify = new LinkedList<HashSet<String>>();
+        List<String> relation = new LinkedList<String>();
+        for(int i=0; i < numFor;i++) {
+            String key = ctx.forClause().var(i).getText();
+            String parent = ctx.forClause().xq(i).getText().split("/")[0];
+            int size = classify.size();
+            boolean found = false;
+            // construct the classification
+            for(int j = 0; j < size; j++) {
+                HashSet<String> curSet = classify.get(j);
+                if(curSet.contains(parent)) {
+                    curSet.add(key);
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
+                HashSet<String> newSet = new HashSet<String>();
+                newSet.add(key);
+                classify.add(newSet);
+                relation.add(key);
+            }
+        }
+        //where clause
+        String[] where = ctx.whereClause().cond().getText().split("and");
+        String[][] cond = new String[where.length][2];
+        for(int i = 0; i < where.length;i++) {
+            cond[i][0] = where[i].split("eq|=")[0];
+            cond[i][1] = where[i].split("eq|=")[1];
+        }
+        /*
+        the relation that the where condition belongs to. it could belong to two relations at most
+         */
+        int[][] relaWhere = new int[cond.length][2];
+        for(int i=0; i < cond.length; i++) {
+            String cur0 = cond[i][0];
+            String cur1 = cond[i][1];
+            relaWhere[i][0] = -1;
+            relaWhere[i][1] = -1;
+            for(int j = 0; j < classify.size();j++) {
+                if(classify.get(j).contains(cur0)) {
+                    relaWhere[i][0] = j;
+                }
+                if(classify.get(j).contains(cur1)) {
+                    relaWhere[i][1] = j;
+                }
+            }
+        }
+        //print out
+        output += "for $tuple in join  (";
+        //writer.print("For $tuple in join  (");
+        System.out.print("for $tuple in join  (");
+        //for clause
+        for(int i = 0; i < classify.size(); i++) {
+            HashSet<String> curSet = classify.get(i);
+            String tuples = "";
+            int count = 0;
+            //print for
+            for(int k = 0; k < numFor; k++) {
+                String key = ctx.forClause().var(k).getText();
+                if(curSet.contains(key)){
+                    if(count == 0) {
+                        output += "for " + key + " in " + ctx.forClause().xq(k).getText();
+                        System.out.print("for " + key + " in " + ctx.forClause().xq(k).getText());
+                        count++;
+                    }else {
+                        output += ",\n";
+                        output += "                   " + key + " in " + ctx.forClause().xq(k).getText();
+                        System.out.println(",");
+                        System.out.print("                   " + key + " in " + ctx.forClause().xq(k).getText());
+                    }
+                    if(tuples.equals("")) {
+                        tuples = tuples + " <" + key.substring(1) + "> " + " {" + key + "} " + " </" + key.substring(1) + ">";
+                    }else {
+                        tuples = tuples + ", <" + key.substring(1) + "> " + " {" + key + "} " + " </" + key.substring(1) + ">";
+                    }
+                }
+            }
+            output += "\n";
+            System.out.print("\n");
+            //print where
+            for(int j = 0;j < cond.length;j++) {
+                int count1 = 0;
+                if(relaWhere[j][1] == -1 && curSet.contains(cond[j][0])) {
+                    if(count1 == 0){
+                        count1++;
+                        output += "where " + cond[j][0] + " eq " + cond[j][1] +"\n";
+                        System.out.println("where " + cond[j][0] + " eq " + cond[j][1]);
+                    }else {
+                        output += " and  " + cond[j][0] + " eq " + cond[j][1] + "\n";
+                        System.out.println(" and  " + cond[j][0] + " eq " + cond[j][1]);
+                    }
+                }
+            }
+            //print return
+            tuples = "<tuple> "+tuples+" </tuple>,";
+            output += "                  return " + tuples + "\n";
+            System.out.println("                  return " + tuples);
+        }
+        //print eq: [af1,al1],[af21,al21]
+        LinkedList<String> ret0 = new LinkedList<String>();
+        LinkedList<String> ret1 = new LinkedList<String>();
+        for(int i = 0; i < cond.length; i++) {
+            if (relaWhere[i][0] == 1 && relaWhere[i][1] == 0) {
+                ret0.add(cond[i][1].substring(1));
+                ret1.add(cond[i][0].substring(1));
+            }else if(relaWhere[i][0] == 0 && relaWhere[i][1] == 1) {
+                ret0.add(cond[i][0].substring(1));
+                ret1.add(cond[i][1].substring(1));
+            }
+        }
+        output = PrintJoinCond(ret0,ret1,output);
+        output += ")\n";
+        System.out.println(")");
+        //return clause
+        String retClause = ctx.returnClause().rt().getText();
+        String[] tempRet = retClause.split("\\$");
+        for (int i = 0; i < tempRet.length-1; i++) {
+            tempRet[i] = tempRet[i]+"$tuple/";
+        }
+        retClause  = tempRet[0];
+        for (int i = 1; i < tempRet.length; i++) {
+            String[] cur = tempRet[i].split(",|/",2);
+            tempRet[i] = cur[0] + "/*";
+            if(cur[1].charAt(0) == '<') {
+                tempRet[i] += ",";
+            }else {
+                tempRet[i] += "/";
+            }
+            tempRet[i] += cur[1];
+            retClause = retClause + tempRet[i];
+        }
+        output += "return\n";
+        output += retClause+"\n";
+        //writer.close();
+        System.out.println("return");
+        System.out.println(retClause);
+        writer w = new writer();
+        w.writing("input/resultOfRewrite.txt",output);
+        return output;
+    }
+
+    private String PrintJoinCond(LinkedList<String> ret0, LinkedList<String> ret1, String output) {
+        output += "                 [";
+        System.out.print("                 [");
+        for(int i = 0; i < ret0.size();i++) {
+            output +=ret0.get(i);
+            System.out.print(ret0.get(i));
+            if(i != ret0.size()-1) {
+                output +=",";
+                System.out.print(",");
+            }
+        }
+        output +="], [";
+        System.out.print("], [");
+        for(int i = 0; i < ret1.size();i++) {
+            output +=ret1.get(i);
+            System.out.print(ret1.get(i));
+            if(i != ret1.size()-1) {
+                output +=",";
+                System.out.print(",");
+            }
+        }
+        output += "]  ";
+        System.out.print("]  ");
+        return output;
+    }
+
+    @Override public LinkedList<Node> visitJoinXQ(XQueryParser.JoinXQContext ctx) { return visitChildren(ctx); }
+    @Override public LinkedList<Node> visitJoinClause(XQueryParser.JoinClauseContext ctx) {
+        LinkedList<Node> left = visit(ctx.xq(0));
+        LinkedList<Node> right = visit(ctx.xq(1));
+        int idSize = ctx.idList(0).ID().size();
+        String [] idListLeft = new String [idSize];
+        String [] idListRight = new String [idSize];
+        for (int i = 0; i < idSize; i++){
+            idListLeft[i] = ctx.idList(0).ID(i).getText();
+            idListRight[i] = ctx.idList(1).ID(i).getText();
+        }
+        HashMap<String, LinkedList<Node>> hashMapOnLeft = buildHashTable(left, idListLeft);
+        LinkedList<Node> result = probeJoin(hashMapOnLeft, right, idListLeft, idListRight);
+
+        return result;
+    }
+    private LinkedList<Node> probeJoin(HashMap<String, LinkedList<Node>> hashMapOnLeft, LinkedList<Node> right, String [] idListLeft, String []idListRight){
+        LinkedList<Node> result = new LinkedList<>();
+        for (Node tuple: right){
+            LinkedList<Node> children = getChildren(tuple);
+            String key = "";
+            for (String hashAtt: idListRight) {
+                for (Node child: children){
+                    if (hashAtt.equals(child.getNodeName())) {
+                        key += child.getFirstChild().getTextContent();
+                    }
+                }
+            }
+
+            if (hashMapOnLeft.containsKey(key))
+                result.addAll(product(hashMapOnLeft.get(key),tuple));
+        }
+        return result;
+    }
+    private LinkedList<Node> product(LinkedList<Node> leftList, Node right){
+        LinkedList<Node> result = new LinkedList<>();
+        for (Node left: leftList){
+            LinkedList<Node> newTupleChildren = getChildren(left);
+            newTupleChildren.addAll(getChildren(right));
+            result.add(makeElem("tuple", newTupleChildren));
+        }
+        return result;
+    }
+
+    private HashMap buildHashTable(LinkedList<Node> tupleList, String [] hashAtts){
+        HashMap<String, LinkedList<Node>> result = new HashMap<>();
+        for (Node tuple: tupleList){
+            LinkedList<Node> children = getChildren(tuple);
+            String key = "";
+            for (String hashAtt: hashAtts) {
+                for (Node child: children){
+                    if (hashAtt.equals(child.getNodeName()))
+                        key += child.getFirstChild().getTextContent();
+                }
+            }
+            if (result.containsKey(key))
+                result.get(key).add(tuple);
+            else{
+                LinkedList<Node> value = new LinkedList<>();
+                value.add(tuple);
+                result.put(key, value);
+            }
+        }
+        return result;
+    }
 
     private void FLWRHelper(int k, LinkedList<Node> results, XQueryParser.FLWRContext ctx){
         int numFor;
@@ -93,7 +338,8 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
     }
 
     @Override public LinkedList<Node> visitCommaXQ(XQueryParser.CommaXQContext ctx) {
-        LinkedList<Node> result = visit(ctx.xq(0));
+        LinkedList<Node> result = new LinkedList<>();
+        copyOf(visit(ctx.xq(0)), result);
         result.addAll(visit(ctx.xq(1)));
         return result;
     }
@@ -176,7 +422,25 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
     }
 
     @Override public LinkedList<Node> visitReturnClause(XQueryParser.ReturnClauseContext ctx) {
-        return visit(ctx.xq());
+
+        return visit(ctx.rt());
+    }
+    @Override public LinkedList<Node> visitTagReturn(XQueryParser.TagReturnContext ctx) {
+        String tagName = ctx.startTag().tagName().getText();
+        LinkedList<Node> nodeList = visit(ctx.rt());
+        Node node = makeElem(tagName, nodeList);
+        LinkedList<Node> result = new  LinkedList<>();
+        result.add(node);
+        return result;
+    }
+
+
+    @Override public LinkedList<Node> visitXqReturn(XQueryParser.XqReturnContext ctx) { return visit(ctx.xq()); }
+
+    @Override public LinkedList<Node> visitCommaReturn(XQueryParser.CommaReturnContext ctx) {
+        LinkedList<Node> result = visit(ctx.rt(0));
+        result.addAll(visit(ctx.rt(1)));
+        return result;
     }
 
     @Override public LinkedList<Node> visitBraceCond(XQueryParser.BraceCondContext ctx) {
@@ -377,6 +641,14 @@ public class CustomizedXQueryVisitor extends XQueryBaseVisitor<LinkedList>{
             for (int i = 0; i < curNode.getChildNodes().getLength(); i++) {
                 childrenList.add(curNode.getChildNodes().item(i));
             }
+        }
+        return childrenList;
+    }
+
+    public static LinkedList<Node> getChildren(Node curNode){
+        LinkedList<Node> childrenList = new LinkedList<Node>();
+        for (int i = 0; i < curNode.getChildNodes().getLength(); i++) {
+            childrenList.add(curNode.getChildNodes().item(i));
         }
         return childrenList;
     }

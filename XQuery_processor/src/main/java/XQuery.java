@@ -18,7 +18,7 @@ public class XQuery {
 
     public static void main(String[] args) throws IOException {
         try{
-            String XQueryFilename = "input/9";
+            String XQueryFilename = "input/JoinTest1";
             InputStream is = new FileInputStream(XQueryFilename);
             ANTLRInputStream input = new ANTLRInputStream(is);
 
@@ -40,12 +40,35 @@ public class XQuery {
                 System.out.println(results.size());
                 finalResult = makeElem(visitor.outputDoc, "result", results);
             }
-            writeToFile(visitor.outputDoc, finalResult, "output/9.xml");
+            writeToFile(visitor.outputDoc, finalResult, "output/JoinTest1.xml");
 
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error: " + e.getMessage());
         }
+    }
+
+    public static LinkedList evalRewrited(String rewrited) {
+        try {
+            ANTLRInputStream input = new ANTLRInputStream(rewrited);
+            XQueryLexer lexer = new XQueryLexer(input);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            XQueryParser parser = new XQueryParser(tokens);
+            parser.removeErrorListeners();
+            ParseTree tree = parser.xq();
+
+            //for Visitor
+            CustomizedXQueryVisitor visitor = new CustomizedXQueryVisitor();
+            visitor.needRewrite = false;
+            LinkedList<Node> results = visitor.visit(tree);
+            return results;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error: " + e.getMessage());
+        }
+        return null;
+
     }
 
 

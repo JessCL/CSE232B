@@ -1,0 +1,3 @@
+for $b in doc("book.xml")//book,
+                        $tb in $b/title
+                    return <tuple> <b> {$b} </b> ,<tb> {$tb} </tb> </tuple>

@@ -35,7 +35,7 @@ attName:  ID;
 
 EQ: '=' | 'eq';
 IS: '==' | 'is';
-ID: [a-zA-Z0-9]+ ;
+ID: [a-zA-Z0-9_-]+ ;
 
 filename: FILENAME;
 FILENAME: [a-zA-Z0-9._]+;

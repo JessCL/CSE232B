@@ -73,12 +73,25 @@ public interface XQueryVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBraceXQ(XQueryParser.BraceXQContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code joinXQ}
+	 * labeled alternative in {@link XQueryParser#xq}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoinXQ(XQueryParser.JoinXQContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code doubleSlashXQ}
 	 * labeled alternative in {@link XQueryParser#xq}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDoubleSlashXQ(XQueryParser.DoubleSlashXQContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XQueryParser#joinClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoinClause(XQueryParser.JoinClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link XQueryParser#forClause}.
 	 * @param ctx the parse tree
@@ -103,6 +116,27 @@ public interface XQueryVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitReturnClause(XQueryParser.ReturnClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code tagReturn}
+	 * labeled alternative in {@link XQueryParser#rt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTagReturn(XQueryParser.TagReturnContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code xqReturn}
+	 * labeled alternative in {@link XQueryParser#rt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXqReturn(XQueryParser.XqReturnContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code commaReturn}
+	 * labeled alternative in {@link XQueryParser#rt}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommaReturn(XQueryParser.CommaReturnContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code braceCond}
 	 * labeled alternative in {@link XQueryParser#cond}.
@@ -177,6 +211,12 @@ public interface XQueryVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitVar(XQueryParser.VarContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link XQueryParser#idList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdList(XQueryParser.IdListContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code doubleAP}
 	 * labeled alternative in {@link XQueryParser#ap}.
