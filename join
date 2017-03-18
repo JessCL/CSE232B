@@ -1,0 +1,86 @@
+test file: http://codebeautify.org/xmlviewer/cb73a7e1
+
+XQuery 2:
+for 
+    $act in doc("j_caesar.xml")//ACT,
+    $title in $act/SCENE/TITLE,
+    $speaker1 in $act//SPEAKER/text(),
+    $speaker2 in $act//SPEAKER/text(),
+    $pg in doc("j_caesar.xml")//PGROUP,
+    $persona1 in $pg/PERSONA/text(),
+    $persona2 in $pg/PERSONA/text()
+    
+where $speaker1 eq $persona1 and $speaker2 eq $persona2
+    
+return
+    <tuple>{
+        <scene>{$title/text()}</scene>,
+        <persona1>{$persona1}</persona1>,
+        <persona2>{$persona2}</persona2>
+    }</tuple>
+
+XQuery 1R:
+for $tuple in
+ join(
+for  $a1 in doc("j_caesar.xml")//ACT/..//ACT,
+      $sc1 in $a1//SCENE,
+      $sp1 in $sc1//SPEAKER/text(),
+      $sl1 in $sc1//LINE
+            where $sp1 = "FLAVIUS"
+return <tuple> {<sl1>{$sl1}</sl1>,<sc1>{$sc1}</sc1>} </tuple>,
+for
+    $a2 in doc("j_caesar.xml")//ACT/..//ACT,
+    $sc2 in $a2//SCENE,
+                $sp2 in $sc2//SPEAKER,
+                $sl2 in $sc2//LINE
+return <tuple> {<sl2>{$sl2}</sl2>,<sc2>{$sc2}</sc2>} </tuple>,
+[sl1, sc1], [sl2, sc2])
+return <result>{<title>{$tuple/sc1/*/TITLE/text()}</title>}</result>
+
+XQuery 3:
+for $a in document("j_caesar.xml")//ACT,
+    $b in document("j_caesar.xml")//ACT,
+    $sa in $a//SCENE,
+    $sb in $b//SCENE,
+    $spa in $sa//SPEAKER,
+    $spb in $sb//SPEAKER/text(),
+    $spc in $sb//SPEAKER
+where $spb="FLAVIUS" and $sa eq $sb and $spa eq $spc
+return <result>{ <title>{$sa/TITLE/text()}</title> }</result>
+
+XQuery 4:
+for $q1 in document("j_caesar.xml")//ACT,
+  $q2 in document("j_caesar.xml")//ACT,
+  $sa in $q1//SCENE,
+  $sb in $q2//SCENE,
+  $spa in $sa//SPEAKER,
+  $spb in $sa//SPEAKER/text(),
+  $spc in $sb//SPEAKER,
+  $spd in $sb//SPEAKER/text(),
+  $spea in $sa//SPEECH,
+  $speb in $sb//SPEECH,
+  $spec in $sa//SPEECH,
+  $sped in $sb//SPEECH
+where $spb="FLAVIUS" and $spd="FLAVIUS" and $sa eq $sb and $spa eq $spc and $speb eq $spec and $spea eq $sped
+return <result>{ <title>{$sa/TITLE/text()}</title>, <speaker>{$spa/*}</speaker> }</result>
+
+XQuery 4R:
+for $tuple in
+ join( for  $q1 in document("j_caesar.xml")//ACT,
+$sa in $q1//SCENE,
+$spa in $sa//SPEAKER,
+$spb in $sa//SPEAKER/text(),
+$spea in $sa//SPEECH,
+$spec in $sa//SPEECH
+where $spb = "FLAVIUS"
+return <tuple> {<sa>{$sa}</sa>,<spa>{$spa}</spa>,<spea>{$spea}</spea>,<spec>{$spec}</spec>} </tuple>,
+     for  $q2 in document("j_caesar.xml")//ACT,
+$sb in $q2//SCENE,
+$spc in $sb//SPEAKER,
+$spd in $sb//SPEAKER/text(),
+$speb in $sb//SPEECH,
+$sped in $sb//SPEECH
+where $spd = "FLAVIUS"
+return <tuple> {<spc>{$spc}</spc>,<sped>{$sped}</sped>,<sb>{$sb}</sb>,<speb>{$speb}</speb>} </tuple>,
+[spa, sa, spea, spec], [spc, sb, sped, speb])
+return <result>{<title>{($tuple/sa/*/TITLE/text())}</title>,<speaker>{($tuple/spa/*/*)}</speaker>}</result>

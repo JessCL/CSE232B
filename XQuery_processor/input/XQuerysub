@@ -1,3 +1,1 @@
-for $b in doc("book.xml")//book,
-                        $tb in $b/title
-                    return <tuple> <b> {$b} </b> ,<tb> {$tb} </tb> </tuple>
+for$actindoc("j_caesar.xml")//ACT,$titlein$act/SCENE/TITLE,$speaker1in$act//SPEAKER/text(),$speaker2in$act//SPEAKER/text(),$pgin$act//PGROUP,$persona1in$pg/PERSONA/text(),$persona2in$pg/PERSONA/text()where$speaker1eq$persona1and$speaker2eq$persona2return<tuple>{<scene>{$title/text()}</scene>,<persona1>{$persona1}</persona1>,<persona2>{$persona2}</persona2>}</tuple>

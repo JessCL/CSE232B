@@ -30,8 +30,124 @@
     </book>
     </triplet>
     <triplet>
+        <book year="1992">
+        <title>Advanced Programming in the Unix environment</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
         <book year="1994">
         <title>TCP/IP Illustrated</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+        <book year="1994">
+        <title>TCP/IP Illustrated</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+    </triplet>
+    <triplet>
+        <book year="1994">
+        <title>TCP/IP Illustrated</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+        <book year="1992">
+        <title>Advanced Programming in the Unix environment</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+        <book year="1994">
+        <title>TCP/IP Illustrated</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+    </triplet>
+    <triplet>
+        <book year="1992">
+        <title>Advanced Programming in the Unix environment</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+        <book year="1992">
+        <title>Advanced Programming in the Unix environment</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+        <book year="1994">
+        <title>TCP/IP Illustrated</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+    </triplet>
+    <triplet>
+        <book year="1994">
+        <title>TCP/IP Illustrated</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+        <book year="1994">
+        <title>TCP/IP Illustrated</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+        <book year="1992">
+        <title>Advanced Programming in the Unix environment</title>
+        <author>
+                <last>Stevens</last>
+                <first>W.</first>
+            </author>
+        <publisher>Addison-Wesley</publisher>
+        <price>65.95</price>
+    </book>
+    </triplet>
+    <triplet>
+        <book year="1992">
+        <title>Advanced Programming in the Unix environment</title>
         <author>
                 <last>Stevens</last>
                 <first>W.</first>
@@ -77,124 +193,8 @@
         <publisher>Addison-Wesley</publisher>
         <price>65.95</price>
     </book>
-        <book year="1994">
-        <title>TCP/IP Illustrated</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-    </triplet>
-    <triplet>
-        <book year="1994">
-        <title>TCP/IP Illustrated</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
         <book year="1992">
         <title>Advanced Programming in the Unix environment</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-        <book year="1992">
-        <title>Advanced Programming in the Unix environment</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-    </triplet>
-    <triplet>
-        <book year="1992">
-        <title>Advanced Programming in the Unix environment</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-        <book year="1994">
-        <title>TCP/IP Illustrated</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-        <book year="1994">
-        <title>TCP/IP Illustrated</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-    </triplet>
-    <triplet>
-        <book year="1992">
-        <title>Advanced Programming in the Unix environment</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-        <book year="1994">
-        <title>TCP/IP Illustrated</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-        <book year="1992">
-        <title>Advanced Programming in the Unix environment</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-    </triplet>
-    <triplet>
-        <book year="1992">
-        <title>Advanced Programming in the Unix environment</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-        <book year="1992">
-        <title>Advanced Programming in the Unix environment</title>
-        <author>
-                <last>Stevens</last>
-                <first>W.</first>
-            </author>
-        <publisher>Addison-Wesley</publisher>
-        <price>65.95</price>
-    </book>
-        <book year="1994">
-        <title>TCP/IP Illustrated</title>
         <author>
                 <last>Stevens</last>
                 <first>W.</first>

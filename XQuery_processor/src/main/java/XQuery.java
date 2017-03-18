@@ -18,7 +18,7 @@ public class XQuery {
 
     public static void main(String[] args) throws IOException {
         try{
-            String XQueryFilename = "input/JoinTest1";
+            String XQueryFilename = "input/jXQuery2";
             InputStream is = new FileInputStream(XQueryFilename);
             ANTLRInputStream input = new ANTLRInputStream(is);
 
@@ -73,7 +73,9 @@ public class XQuery {
 
 
     public static void writeToFile(Document doc, LinkedList<Node> result, String filePath) {
-        doc.appendChild(result.get(0));
+
+        doc.appendChild(doc.importNode(result.get(0), true));
+
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
             Transformer transformer = factory.newTransformer();
